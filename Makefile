@@ -1,2 +1,2 @@
 all:
-	g++ -Wall -Werror -o geometry main.cpp
+	g++ -Wall -Werror main.cpp
