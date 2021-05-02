@@ -37,19 +37,6 @@ CTEST(Parsing, Identify_name)
     ASSERT_EQUAL(exp_rez, real);
 }
 
-CTEST(Parsing, word_to_lower)
-{
-    std::string test = "AbCdEf";
-
-    std::string real = word_tolower(test);
-
-    std::string exp_rez = "abcdef";
-
-    const char* exp_str = exp_rez.c_str();
-    const char* real_str = real.c_str();
-
-    ASSERT_STR(exp_str, real_str);
-}
 
 CTEST(Parsing, parse_name_with_space_before)
 {
