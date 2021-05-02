@@ -27,7 +27,6 @@ CTEST(P_and_a_of_circle, Area)
     ASSERT_DBL_NEAR(exp_area, real);
 }
 
-
 CTEST(Parsing, Identify_name)
 {
     Figures real = identify("circle");
@@ -36,7 +35,6 @@ CTEST(Parsing, Identify_name)
 
     ASSERT_EQUAL(exp_rez, real);
 }
-
 
 CTEST(Parsing, parse_name_with_space_before)
 {
