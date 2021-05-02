@@ -1,0 +1,7 @@
+#Ignore build files
+*.exe
+*.o
+*.out
+*.stackdump
+*.d
+*.a
