@@ -1,83 +1,45 @@
+#include <algorithm>
 #include <iostream>
-
+#include <libgeometry/geometry.h>
+#include <libgeometry/parse.h>
+#include <limits>
+#include <string>
+#include <vector>
 using namespace std;
-
-struct circle {
-    float x;
-    float y;
-    float radius;
-};
-
-enum Figures {
-    CIRCLE, ERROR
-};
-
-string parse_name(string input)
-{
-    string figureName;
-    if (input.substr(0,1) == " "){
-        input.erase(0, input.find_first_not_of(" "));
-    }
-
-    if (input.substr(input.find("(") - 1, 1) == " ") {
-        input = input.erase(input.find(" "), input.find("(") - input.find(" "));
-    }
-
-    figureName = input.substr(0, input.find("("));
-    return figureName;
-}
-
-void find_circle_param(circle circle_object)
-{
-    float per = 2 * 3.14 * circle_object.radius;
-    float area = 3.14 * circle_object.radius * circle_object.radius;
-
-    cout << " Perimetr: " << per << endl;
-    cout << " Area: " << area << endl;
-}
-
-Figures identify(string figure) 
-{
-    string figureName;
-
-    figureName = "circle";
-    if (figure == figureName) return CIRCLE;
-
-    return ERROR;
-}
-
-void parse_circle(string input, circle* circle_object)
-{
-    size_t end;  
-    input = input.erase(0, 6);
-    if (input[0] == '('){
-        input.erase(0,1);
-        circle_object->x = stod(input, &end);
-        input = input.erase(0, end);
-        circle_object->y = stod(input, &end);
-        input = input.erase(0, end+1);
-        circle_object->radius = stod(input, &end);
-    };
-}
 
 int main()
 {
     string input, figureName;
-    getline(cin, input);
 
-    figureName = parse_name(input);
+    int number_of_figures;
+    cout << "Input the number of figures" << endl;
+    cin >> number_of_figures;
+    cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+	vector<vector<int>> intersections (number_of_figures, vector<int>(number_of_figures, -1));
+    circle circles[number_of_figures];
 
-    switch (identify(figureName)) {
-    case CIRCLE:
-        circle circle_object;
-        parse_circle(input, &circle_object);
-        find_circle_param(circle_object);
-    break;
+    for (int i = 0; i < number_of_figures; i++) {
+        getline(cin, input);
+        figureName = parse_name(&input);
 
-    case ERROR:
-        cout << "Wrong name";
+        switch (identify(figureName)) {
+        case CIRCLE:
+            parse_circle(input, &circles[i]);
+            break;
+        case ERROR:
+            cout << input << endl;
+            cout << '^' << endl;
+            cout << "Error in name of figure!";
+        }
     }
 
+    intersect(circles, intersections,number_of_figures);
 
-    return 0;
+    double perimeter, area;
+    cout << endl;
+    for (int i = 0; i < number_of_figures; i++) {
+        print_circle(&circles[i], i, &perimeter, &area, intersections, number_of_figures);
+
+    }
 }
