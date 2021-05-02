@@ -16,7 +16,8 @@ int main()
     cin >> number_of_figures;
     cin.clear();
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
-	vector<vector<int>> intersections (number_of_figures, vector<int>(number_of_figures, -1));
+    vector<vector<int>> intersections(
+            number_of_figures, vector<int>(number_of_figures, -1));
     circle circles[number_of_figures];
 
     for (int i = 0; i < number_of_figures; i++) {
@@ -34,12 +35,17 @@ int main()
         }
     }
 
-    intersect(circles, intersections,number_of_figures);
+    intersect(circles, intersections, number_of_figures);
 
     double perimeter, area;
     cout << endl;
     for (int i = 0; i < number_of_figures; i++) {
-        print_circle(&circles[i], i, &perimeter, &area, intersections, number_of_figures);
-
+        print_circle(
+                &circles[i],
+                i,
+                &perimeter,
+                &area,
+                intersections,
+                number_of_figures);
     }
 }

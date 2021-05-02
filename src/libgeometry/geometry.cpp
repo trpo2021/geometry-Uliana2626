@@ -19,7 +19,6 @@ double circle_area(double radius)
     return area;
 }
 
-
 void find_circle_param(circle circl, double* perimeter, double* area)
 {
     *perimeter = circle_perimeter(circl.radius);
@@ -32,28 +31,38 @@ double distance_between_points(double x1, double x2, double y1, double y2)
     return rez;
 }
 
-void intersect(circle circles[], vector<vector<int>>&a, int n)
+void intersect(circle circles[], vector<vector<int>>& a, int n)
 {
-	for (int i = 0; i < n; i++){
-		for (int j = 0; j < n; j++){
-			if ((circles[i].radius + circles[j].radius)>=
-			distance_between_points(circles[i].x, circles[j].x, circles[i].y, circles[j].y)) a[i][j] = 1;
-		}
-	}
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            if ((circles[i].radius + circles[j].radius)
+                >= distance_between_points(
+                        circles[i].x, circles[j].x, circles[i].y, circles[j].y))
+                a[i][j] = 1;
+        }
+    }
 }
 
-void print_circle(circle* circl, int num, double* perimeter, double* area, vector<vector<int>>&a, int n)
+void print_circle(
+        circle* circl,
+        int num,
+        double* perimeter,
+        double* area,
+        vector<vector<int>>& a,
+        int n)
 {
-    cout << num+1 << "."
-         << "circle(" << circl->x << ' ' << circl->y << ", "
-         << circl->radius << ")" << endl;
+    cout << num + 1 << "."
+         << "circle(" << circl->x << ' ' << circl->y << ", " << circl->radius
+         << ")" << endl;
     find_circle_param(*circl, perimeter, area);
     cout << "Perimetr: " << *perimeter << endl;
     cout << "Area: " << *area << endl;
-	cout << "Intersects: ";
-	for (int j = 0; j < n; j++){
-		if (num == j) continue;
-		if (a[num][j] == 1) cout << j+1;
-	}
-	cout << endl;
+    cout << "Intersects: ";
+    for (int j = 0; j < n; j++) {
+        if (num == j)
+            continue;
+        if (a[num][j] == 1)
+            cout << j + 1;
+    }
+    cout << endl;
 }

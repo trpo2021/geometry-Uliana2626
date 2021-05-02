@@ -8,7 +8,7 @@ using namespace std;
 string parse_name(string* input)
 {
     string figureName;
-    if (input->substr(0,1) == " "){
+    if (input->substr(0, 1) == " ") {
         input->erase(0, input->find_first_not_of(" "));
     }
 
@@ -20,12 +20,13 @@ string parse_name(string* input)
     return figureName;
 }
 
-Figures identify(string figure) 
+Figures identify(string figure)
 {
     string figureName;
 
     figureName = "circle";
-    if (figure == figureName) return CIRCLE;
+    if (figure == figureName)
+        return CIRCLE;
 
     return ERROR;
 }
